@@ -1,0 +1,79 @@
+---
+{{- range $key, $value := .Values.services }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $key }}
+  namespace: dev # previously named dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $key }}
+  template:
+    metadata:
+      labels:
+        app: {{ $key }}
+    spec:
+      volumes:
+      - name: env
+        secret:
+          secretName: dev-env
+          items:
+          - key: envfile
+            path: ".env"
+      containers:
+       - name: {{ $key }}
+         image: {{ $value.image }}:{{ $value.tag }}
+         volumeMounts:
+          - name: env
+            mountPath: "/app/.env"
+            subPath: ".env"
+            # readOnly: true
+         env:
+           - name: NODE_ENV
+             valueFrom:
+               configMapKeyRef:
+                 name: {{ $key }}
+                 key: node_env
+           - name: LOGGING_LEVEL
+             valueFrom:
+               configMapKeyRef:
+                 name: {{ $key }}
+                 key: logging_level
+         ports:
+         - containerPort: 4000
+           protocol: TCP
+         imagePullPolicy: IfNotPresent
+         name: xg-console
+---
+{{- end }}
+
+
+---
+
+{{- range $key, $value := .Values.services }}
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev # previously named dev
+  name: {{ $key }}
+  annotations: # previously named dev
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:514675220973:certificate/cabdacb8-c8bf-4449-9217-d5c8b3589c11
+    service.beta.kubernetes.io/aws-load-balancer-name: xterantiy-dev
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  selector:
+    app: {{ $key }}
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 4000
+  - name: https
+    port: 443
+    targetPort: 4000
+  type: LoadBalancer
+---
+{{- end}}

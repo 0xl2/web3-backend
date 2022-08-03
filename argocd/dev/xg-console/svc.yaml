@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev # previously named dev
+  name: xg-console
+  annotations: # previously named dev
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:514675220973:certificate/cabdacb8-c8bf-4449-9217-d5c8b3589c11
+    service.beta.kubernetes.io/aws-load-balancer-name: xterantiy-dev
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  selector:
+    app: xg-console
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 4000
+  - name: https
+    port: 443
+    targetPort: 4000
+  type: LoadBalancer

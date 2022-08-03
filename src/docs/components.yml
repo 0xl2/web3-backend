@@ -1,0 +1,445 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          enum: [user, admin]
+        isEmailVerified:
+          type: boolean
+        gameId:
+          type: string
+        imageUrl:
+          type: string
+
+      example:
+        id: 5ebac534954b54139806c112
+        imageUrl: "https://api.lorem.space/image/face?hash=92310"
+        gameId: "62840b1834e23e66ecc95c32"
+        isEmailVerified: false
+        email: fake@example.com
+        name: fake name
+        role: user
+
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+        externalPlayerId:
+          type: string
+        gameId:
+          type: string
+        isEmailVerified:
+          type: boolean
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        wallets:
+          type: object
+          properties:
+            "polygon":
+              type: object
+              properties:
+                address:
+                  type: string
+                isExternal:
+                  type: boolean
+        status:
+          type: string
+          enum: [init, active]
+
+    GameConfig:
+      theme:
+        type: object
+        properties:
+          fonts:
+            type: object
+            properties:
+              body:
+                type: string
+              heading:
+                type: string
+              monospace:
+                type: string
+          media:
+            type: object
+            properties:
+              logo:
+                type: object
+                properties:
+                  mediaType:
+                    type: string
+                  mediaUrl:
+                    type: string
+                  clickUrl:
+                    type: string
+              hero:
+                type: object
+                properties:
+                  mediaType:
+                    type: string
+                  mediaUrl:
+                    type: string
+                  clickUrl:
+                    type: string
+              banner:
+                type: object
+                properties:
+                  mediaType:
+                    type: string
+                  mediaUrl:
+                    type: string
+                  clickUrl:
+                    type: string
+              timed_promo:
+                type: object
+                properties:
+                  mediaType:
+                    type: string
+                  mediaUrl:
+                    type: string
+                  clickUrl:
+                    type: string
+              lootbox:
+                type: object
+                properties:
+                  mediaType:
+                    type: string
+                  mediaUrl:
+                    type: string
+                  clickUrl:
+                    type: string
+              extra:
+                type: object
+          colors:
+            type: object
+            properties:
+              card-color:
+                type: string
+              text-color:
+                type: string
+              higlight-color:
+                type: string
+              background-color:
+                type: string
+              background-color2:
+                type: string
+
+    GameEmailConfig:
+      emails:
+        type: object
+        properties:
+          web3link:
+            type: object
+            properties:
+              subject:
+                type: string
+              imageUrl:
+                type: string
+              gameTitle:
+                type: string
+              gameSubTitle:
+                type: string
+              rarityBoxes:
+                type: array
+                items:
+                  type: string
+
+    Game:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        mediaUrl:
+          type: string
+        contracts:
+          type: object
+        metadata:
+          type: object
+          properties:
+            immutableXProjectId:
+              type: string
+        config:
+          type: object
+          properties:
+            $ref: "#/components/schemas/GameConfig"
+        gameConfig:
+          type: object
+          properties:
+            $ref: "#components/schemas/GameEmailConfig"
+
+    GameToken:
+      type: object
+      properties:
+        id:
+          type: string
+        gameId:
+          type: number
+        cap:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        status:
+          type: string
+        attributes:
+          type: object
+          properties:
+            damage:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [checkbox, text, range, enum]
+                values:
+                  type: array
+                  items:
+                    type: string
+                  default: null
+                autoSelected:
+                  type: boolean
+                  default: false
+                autoSelectedValue:
+                  type: string
+                  default: null
+        sale:
+          type: object
+          properties:
+            type:
+              type: string
+            price:
+              type: number
+            currency:
+              type: string
+        minted:
+          type: string
+        symbol:
+          type: string
+        imageUrl:
+          type: string
+        chainName:
+          type: string
+        shortTokenId:
+          type: number
+        createdAt:
+          type: string
+
+    Networks:
+      type: array
+      items:
+        type: string
+
+    AuthToken:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+        expires: 2020-05-12T16:18:04.793Z
+
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        value:
+          type: string
+        issuer:
+          type: string
+        type:
+          type: string
+        created:
+          type: string
+
+    AuthTokens:
+      type: object
+      properties:
+        access:
+          $ref: "#/components/schemas/AuthToken"
+
+    MintedNFTS:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        userId:
+          type: string
+        gameId:
+          type: string
+        tokenId:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        createdAt:
+          type: string
+        gameTokenId:
+          type: string
+        transactionHash:
+          type: string
+        marketUrl:
+          type: string
+        chainName:
+          type: string
+        status:
+          type: string
+        imageUrl:
+          type: string
+
+    Assets:
+      type: object
+      properties:
+        id:
+          type: string
+        network:
+          type: string
+        collection:
+          type: object
+          properties:
+            name:
+              type: string
+            icon_url:
+              type: string
+        created_at:
+          type: string
+        synced_at:
+          type: string
+        image_url:
+          type: string
+        metadata:
+          type: object
+          properties:
+            name:
+              type: string
+            image:
+              type: string
+            health:
+              type: number
+        name:
+          type: string
+        status:
+          type: string
+        token_hash:
+          type: string
+        token_address:
+          type: string
+        token_uri:
+          type: string
+        block_number_minted:
+          type: string
+        block_number:
+          type: string
+        token_id:
+          type: string
+        is_valid:
+          type: number
+        updated_at:
+          type: string
+        uri:
+          type: string
+        user:
+          type: string
+        owner_of:
+          type: string
+        amount:
+          type: string
+        contract_type:
+          type: string
+        symbol:
+          type: string
+        syncing:
+          type: number
+        frozen:
+          type: number
+
+    Error:
+      type: object
+      properties:
+        status:
+          type: "ERROR"
+        data:
+          type: object
+        meta:
+          type: object
+        error:
+          type: array
+          items:
+            type: string
+
+  responses:
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            {
+              status: "ERROR",
+              data: {},
+              meta: {},
+              error: [Email already taken],
+            }
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            {
+              status: "ERROR",
+              data: {},
+              meta: {},
+              error: [Please authenticate],
+            }
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            status: "ERROR"
+            data: {}
+            meta: {}
+            error: [Forbidden]
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example: { status: "ERROR", data: {}, meta: {}, error: [Not found] }
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+
+# Webstorm
+.idea
+
+# yarn error logs
+yarn-error.log
+
+# Environment varibales
+.env*
+!.env*.example
+
+# Code coverage
+coverage
+
+dist
+
+fireblocks_secret.key
+exceptions.log
+rejections.log
