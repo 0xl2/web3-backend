@@ -16,7 +16,7 @@ describe('Game service', () => {
       _id: Types.ObjectId(),
       gameId: '100',
       cap: '1000',
-      name: 'Xternity Test Collection',
+      name: 'Test Collection',
       type: GAME_TOKEN_TYPE.NFT,
       minted: '0',
       imageUrl: null,

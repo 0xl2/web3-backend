@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "xternity-web3-sdk",
+      "name": "web3-sdk",
       "script": "node -r ./tsconfig-paths-bootstrap.js ./dist/src/index.js",
       "instances": 1,
       "autorestart": true,

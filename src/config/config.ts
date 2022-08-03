@@ -16,7 +16,7 @@ let envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
     XG_APP_URL: Joi.string().description('game-zone base url'),
-    CONTACT_EMAIL: Joi.string().required().description('Xternity contact email'),
+    CONTACT_EMAIL: Joi.string().required().description('contact email'),
     APP_TYPE: Joi.string()
       .valid(...Object.values(APP_TYPE))
       .required(),
@@ -54,10 +54,8 @@ let envVarsSchema = Joi.object()
     SIMPLEX_API_KEY: Joi.string().required().description('Simplex api key'),
     SIMPLEX_WALLET_ID: Joi.string().required().description('Simplex wallet id'),
     SIMPLEX_ETH_WALLET_ADDRESS: Joi.string().required().description('Simplex wallet address'),
-    // XTERNITY_ETHEREUM_MAINNET_RPC_NODE: Joi.string().required().description('Ethereum mainnet rpc node'),
-    XTERNITY_ETHEREUM_ROPSTEN_RPC_NODE: Joi.string().required().description('Ethereum ropsten rpc node'),
-    // XTERNITY_POLYGON_MAINNET_RPC_NODE: Joi.string().required().description('Polygon mainnet rpc node'),
-    XTERNITY_POLYGON_MUMBAI_RPC_NODE: Joi.string().required().description('Polygon mumbai rpc node'),
+    ETHEREUM_ROPSTEN_RPC_NODE: Joi.string().required().description('Ethereum ropsten rpc node'),
+    POLYGON_MUMBAI_RPC_NODE: Joi.string().required().description('Polygon mumbai rpc node'),
     GOOGLE_CLIENT_ID: Joi.string().required().description('Google client id'),
     GOOGLE_CLIENT_SECRET: Joi.string().required().description('Google client secret'),
   })
@@ -164,9 +162,9 @@ export const Config = {
     walletId: envVars.SIMPLEX_WALLET_ID,
   },
   rpcNodes: {
-    ethereumMainnet: envVars.XTERNITY_ETHEREUM_MAINNET_RPC_NODE,
-    ethereumRopsten: envVars.XTERNITY_ETHEREUM_ROPSTEN_RPC_NODE,
-    polygonMainnet: envVars.XTERNITY_POLYGON_MAINNET_RPC_NODE,
-    polygonMumbai: envVars.XTERNITY_POLYGON_MUMBAI_RPC_NODE,
+    ethereumMainnet: envVars.ETHEREUM_MAINNET_RPC_NODE,
+    ethereumRopsten: envVars.ETHEREUM_ROPSTEN_RPC_NODE,
+    polygonMainnet: envVars.POLYGON_MAINNET_RPC_NODE,
+    polygonMumbai: envVars.POLYGON_MUMBAI_RPC_NODE,
   },
 };

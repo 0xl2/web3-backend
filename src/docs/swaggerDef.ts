@@ -3,7 +3,7 @@ import { SwaggerDefinition } from 'swagger-jsdoc';
 export const swaggerDefinition: SwaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'XternityGames Web3 API Documentation',
+    title: 'Web3 API Documentation',
     version: '1.0.0',
     license: {
       name: 'MIT',
@@ -11,7 +11,7 @@ export const swaggerDefinition: SwaggerDefinition = {
   },
   servers: [
     {
-      url: `https://dev-api.xternity.games/v1`,
+      url: `https://dev-api.games/v1`,
     },
   ],
 };

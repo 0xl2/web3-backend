@@ -1,4 +1,0 @@
-services:
-  xg-console:
-    image: "514675220973.dkr.ecr.us-east-1.amazonaws.com/xternity-dev"
-    tag: "0.2"

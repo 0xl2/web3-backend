@@ -64,7 +64,6 @@ export const AuthRoute = {
  *                   items:
  *                     type: object
  *                     properties:
- *                       url: 'https://xternity.games.net/?ot=sopeId'
  *                 meta:
  *                   type: object
  *                 error:

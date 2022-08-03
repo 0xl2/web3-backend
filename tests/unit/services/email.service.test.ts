@@ -15,7 +15,7 @@ const emailSendFunctionTest = async () => {
     key: 'test key',
     message: {
       from_email: 'test email',
-      from_name: 'Xternity Team',
+      from_name: 'Dev team',
       subject: 'test',
       text: 'test',
       to: [
@@ -49,7 +49,7 @@ describe('Email service', () => {
         key: 'test key',
         message: {
           from_email: 'test email',
-          from_name: 'Xternity Team',
+          from_name: 'Dev team',
           subject: 'Reset password',
           text: `Dear user,
                 To reset your password, click on this link: http://link-to-app/reset-password?token=test
@@ -77,7 +77,7 @@ describe('Email service', () => {
         key: 'test key',
         message: {
           from_email: 'test email',
-          from_name: 'Xternity Team',
+          from_name: 'Dev team',
           subject: 'Email Verification',
           text: `Dear user,
                 To verify your email, click on this link: http://link-to-app/verify-email?token=test
